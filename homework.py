@@ -101,7 +101,7 @@ class SportsWalking(Training):
         total_speed = (self.get_mean_speed() ** 2 // self.height)
         total_speed_at_weight = (total_speed
                                  * self.coeff_calorie_4
-                                 * self.weight) 
+                                 * self.weight)
         spend_calories_sportwalking = ((self.coeff_calorie_3
                                        * self.weight
                                        + total_speed_at_weight)
