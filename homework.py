@@ -12,16 +12,23 @@ class InfoMessage:
         self.distance = '%.3f' % distance
         self.speed = '%.3f' % speed
         self.calories = '%.3f' % calories
-   
+
     def get_message(self):
-        message = f'Тип тренировки: {self.training_type}; Длительность: {self.duration} ч.; Дистанция: {self.distance} км; Ср. скорость: {self.speed} км/ч; Потрачено ккал: {self.calories}.'
+        message1 = f'Тип тренировки: {self.training_type}; '
+        message2 = f'Длительность: {self.duration} ч.; '
+        message3 = f'Дистанция: {self.distance} км; '
+        message4 = f'Ср. скорость: {self.speed} км/ч; '
+        message5 = f'Потрачено ккал: {self.calories}.'
+        message = message1+message2+message3+message4+message5
         return message
 
 class Training:
+
     """Базовый класс тренировки."""
     LEN_STEP: float = 0.65
     M_IN_KM: float = 1000
     M_IN_H: float = 60
+
     def __init__(self,
                  action: int,
                  duration: float,
@@ -33,12 +40,12 @@ class Training:
 
     def get_distance(self) -> float:
         """Получить дистанцию в км."""
-        distance = self.action*self.LEN_STEP/self.M_IN_KM
+        distance = self.action * self.LEN_STEP / self.M_IN_KM
         return distance
         
     def get_mean_speed(self) -> float:
         """Получить среднюю скорость движения."""
-        mean_speed = self.get_distance()/self.duration
+        mean_speed = self.get_distance() / self.duration
         return mean_speed
 
     def get_spent_calories(self) -> float:
@@ -82,7 +89,7 @@ class SportsWalking(Training):
 
     def get_spent_calories(self) -> float:
         """Получить количество затраченных калорий."""
-        spend_calories_sportwalking = (self.coeff_calorie_3 *self.weight + (self.get_mean_speed()**2// self.height) *self.coeff_calorie_4 * self.weight) * self.duration * self.M_IN_H
+        spend_calories_sportwalking = (self.coeff_calorie_3 * self.weight + (self.get_mean_speed() ** 2 // self.height) * self.coeff_calorie_4 * self.weight) * self.duration * self.M_IN_H
         return spend_calories_sportwalking
 
 class Swimming(Training):
