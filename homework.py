@@ -1,8 +1,3 @@
-from msilib.schema import Class
-from turtle import distance
-
-
-
 class InfoMessage:
     """Информационное сообщение о тренировке."""
     def __init__(self,
