@@ -46,8 +46,8 @@ class Training:
     def get_spent_calories(self) -> float:
         """Получить количество затраченных калорий."""
         raise NotImplementedError('Калории можно посчитать '
-                                    'только для Running, SportsWalking '
-                                    'или Swimming')
+                                  'только для Running, SportsWalking '
+                                  'или Swimming')
 
     def show_training_info(self) -> InfoMessage:
         """Получить объект класса ссобщения."""
@@ -131,9 +131,11 @@ class Swimming(Training):
                                    * self.weight)
         return spend_calories_swimming
 
+
 dict = {'SWM': Swimming,
         'RUN': Running,
         'WLK': SportsWalking}
+
 
 def read_package(workout_type: str, data: Astrakhanets) -> Training:
     """Прочитать данные полученные от датчиков."""
@@ -141,6 +143,7 @@ def read_package(workout_type: str, data: Astrakhanets) -> Training:
         return dict[workout_type](*data)
     else:
         print('Попробуй другой тип тренировки')
+
 
 def main(training: Training) -> None:
     """Главная функция."""
