@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import List, Optional
+from typing import Dict, List
 
 
 @dataclass
@@ -128,23 +128,27 @@ class Swimming(Training):
                 * self.weight)
 
 
-decoding_of_abbreviations = {'SWM': Swimming,
-                             'RUN': Running,
-                             'WLK': SportsWalking}
+DECODING_OF_ABBREVIATIONS: Dict[str, Training] = {
+    'SWM': Swimming,
+    'RUN': Running,
+    'WLK': SportsWalking
+}
 
 
-def read_package(workout_type: str, data: List[float]) -> Optional[Training]:
+def read_package(workout_type: str, data: List[float]) -> Training:
     """Прочитать данные полученные от датчиков."""
-    return decoding_of_abbreviations[workout_type](*data)
+    if workout_type in DECODING_OF_ABBREVIATIONS.keys():
+        return DECODING_OF_ABBREVIATIONS[workout_type](*data)
+    else:
+        return None
 
 
 def main(training: Training) -> None:
     """Главная функция."""
-    info = training.show_training_info()
-    if training == 'SWM' or 'RUN' or 'WLK':
-        print(info.get_message())
+    if training is None:
+        print('Неизвестный вид тренировки')
     else:
-        print('неизвестный вид тренировки')
+        print(training.show_training_info().get_message())
 
 
 if __name__ == '__main__':
